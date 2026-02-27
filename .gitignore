@@ -1,0 +1,68 @@
+# OS / editor
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# Node / Next.js
+**/node_modules/
+**/.next/
+**/out/
+**/.turbo/
+**/coverage/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# Python
+**/__pycache__/
+**/*.py[cod]
+**/.pytest_cache/
+**/.mypy_cache/
+**/.ruff_cache/
+**/.tox/
+**/.nox/
+**/.coverage
+**/.coverage.*
+**/htmlcov/
+**/.ipynb_checkpoints/
+**/.venv/
+**/venv/
+**/env/
+**/ENV/
+**/*.egg-info/
+
+# Build / temp outputs
+**/build/
+**/dist/
+**/tmp/
+**/temp/
+*.pid
+
+# Local environment and secrets
+**/.env
+**/.env.*
+!**/.env.example
+!**/.env.sample
+!**/.env.template
+*.pem
+*.pfx
+*.p12
+*.key
+*.crt
+*.cer
+*.jks
+*.keystore
+
+# Terraform (if used locally)
+.terraform/
+*.tfstate
+*.tfstate.*
+crash.log
+override.tf
+override.tf.json
+*_override.tf
+*_override.tf.json
