@@ -24,6 +24,10 @@ export const msalConfig: Configuration = {
 
 export const loginRequest = {
   scopes: ['openid', 'profile', apiScope],
+  extraScopesToConsent: [
+    'https://ai.azure.com/user_impersonation',
+    'https://api.fabric.microsoft.com/Item.ReadWrite.All',
+  ],
 };
 
 export const tokenRequest = {

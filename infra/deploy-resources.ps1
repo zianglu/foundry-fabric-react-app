@@ -1,12 +1,8 @@
 param(
-  [Parameter(Mandatory = $true)]
-  [string]$SubscriptionId,
-
-  [Parameter(Mandatory = $true)]
-  [string]$ResourceGroupName,
-
-  [string]$Location = 'eastus',
-  [string]$Prefix = 'contosotruck'
+  [string]$SubscriptionId = '7ea90583-182a-46ed-aa37-c4bd96e90887',
+  [string]$ResourceGroupName = 'rg-fabric-apps',
+  [string]$Location = 'eastus2',
+  [string]$Prefix = 'fabxrk'
 )
 
 $ErrorActionPreference = 'Stop'

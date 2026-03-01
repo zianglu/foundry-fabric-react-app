@@ -20,4 +20,5 @@ class ChatRequest(BaseModel):
 
 class ChatResponse(BaseModel):
     answer: str
+    thread_id: str | None = None
     raw: dict[str, Any] | None = None

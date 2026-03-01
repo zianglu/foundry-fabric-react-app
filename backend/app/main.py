@@ -128,4 +128,8 @@ def chat(
         question=request.question,
         thread_id=request.thread_id,
     )
-    return ChatResponse(answer=result["answer"], raw=result.get("raw"))
+    return ChatResponse(
+        answer=result["answer"],
+        thread_id=result.get("thread_id"),
+        raw=result.get("raw"),
+    )

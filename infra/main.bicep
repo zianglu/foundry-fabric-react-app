@@ -2,7 +2,7 @@
 param location string = resourceGroup().location
 
 @description('Name prefix used for resources')
-param prefix string = 'contosotruck'
+param prefix string
 
 @description('Container Apps environment name')
 param containerAppsEnvironmentName string = '${prefix}-cae'
