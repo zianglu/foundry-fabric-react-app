@@ -66,6 +66,11 @@ export async function getCustomers(): Promise<Record<string, unknown>[]> {
   return response.items ?? [];
 }
 
+export async function getTerminals(): Promise<Record<string, unknown>[]> {
+  const response = await apiRequest<EntityListResponse>('/api/terminals', 'GET');
+  return response.items ?? [];
+}
+
 export async function getActiveTripsByCustomer(customerId: string): Promise<Record<string, unknown>[]> {
   const encodedId = encodeURIComponent(customerId);
   const response = await apiRequest<EntityListResponse>(`/api/customers/${encodedId}/active-trips`, 'GET');

@@ -62,6 +62,14 @@ def get_trucks(
     return EntityListResponse(items=graph_client.list_trucks(user))
 
 
+@app.get("/api/terminals", response_model=EntityListResponse)
+def get_terminals(
+    user: UserContext = Depends(get_user_context),
+    graph_client: FabricGraphClient = Depends(get_graph_client),
+) -> EntityListResponse:
+    return EntityListResponse(items=graph_client.list_terminals(user))
+
+
 @app.get("/api/drivers", response_model=EntityListResponse)
 def get_drivers(
     user: UserContext = Depends(get_user_context),

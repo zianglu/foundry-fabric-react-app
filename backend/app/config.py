@@ -32,6 +32,7 @@ class Settings(BaseSettings):
     foundry_agent_id: str | None = Field(default=None, alias="FOUNDRY_AGENT_ID")
 
     fabric_graph_base_url: str = Field(..., alias="FABRIC_GRAPH_BASE_URL")
+    fabric_graphql_url: str = Field(..., alias="FABRIC_GRAPHQL_URL")
     fabric_graph_scope: str = Field(default="https://api.fabric.microsoft.com/.default", alias="FABRIC_GRAPH_SCOPE")
     fabric_graph_trucks_path: str = Field(default="/trucks", alias="FABRIC_GRAPH_TRUCKS_PATH")
     fabric_graph_drivers_path: str = Field(default="/drivers", alias="FABRIC_GRAPH_DRIVERS_PATH")

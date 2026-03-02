@@ -78,6 +78,67 @@ class FabricGraphClient:
     def list_customers(self, user: UserContext) -> list[dict[str, Any]]:
         return self._get_collection(user, self.settings.fabric_graph_customers_path)
 
+    def query_graphql(
+        self,
+        user: UserContext,
+        query: str,
+    ) -> dict[str, Any]:
+        access_token = self.token_provider.get_access_token(
+            user_assertion_token=user.access_token,
+            scope=self.settings.fabric_graph_scope,
+        )
+
+        response = self.session.post(
+            self.settings.fabric_graphql_url,
+            headers={
+                "Authorization": f"Bearer {access_token}",
+                "Content-Type": "application/json",
+                "Accept": "application/json",
+            },
+            json={"query": query},
+            timeout=120,
+        )
+
+        if not response.ok:
+            raise HTTPException(
+                status_code=status.HTTP_502_BAD_GATEWAY,
+                detail=(
+                    f"Fabric GraphQL request failed ({response.status_code}): {response.text}"
+                ),
+            )
+
+        return response.json()
+
+    def list_terminals(self, user: UserContext) -> list[dict[str, Any]]:
+        query = """query {
+  terminals(first: 100) {
+    items {
+      name
+      latitude
+      longitude
+    }
+  }
+}"""
+        payload = self.query_graphql(user, query)
+
+        import logging
+        logging.getLogger(__name__).info("Fabric terminals raw response: %s", payload)
+
+        items = (payload.get("data") or {}).get("terminals", {}).get("items", [])
+        terminals: list[dict[str, Any]] = []
+        for row in items:
+            if isinstance(row, dict):
+                name = row.get("name")
+                lat = row.get("latitude")
+                lon = row.get("longitude")
+                if name is not None and lat is not None and lon is not None:
+                    terminals.append({
+                        "name": str(name),
+                        "latitude": float(lat),
+                        "longitude": float(lon),
+                    })
+        return terminals
+
     def list_trips(
         self,
         user: UserContext,
